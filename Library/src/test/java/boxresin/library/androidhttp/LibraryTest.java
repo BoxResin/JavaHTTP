@@ -4,6 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.nio.charset.Charset;
 
 /**
  * Created by Minsuk Eom on 2017-04-27.
@@ -11,7 +12,7 @@ import java.io.IOException;
 public class LibraryTest
 {
 	@Test
-	public void test() throws IOException
+	public void testHttpRequester() throws IOException
 	{
 		// Test a normal request.
 		HttpResponse response = new HttpRequester()
@@ -48,5 +49,26 @@ public class LibraryTest
 				.request();
 
 		Assert.assertEquals("Hello World!\napiKey is detected.\nWorld!\n", response.getBody());
+	}
+
+	@Test
+	public void testHttpResponse() throws IOException
+	{
+		// Test the encoding detection process.
+		HttpResponse response = new HttpRequester()
+				.setUrl("http://localhost/test/euc.php")
+				.setMethod("get")
+				.request();
+
+		Assert.assertEquals("EUC-KR", response.getBodyEncoding());
+		System.out.println(new String(response.getBodyAsByteArray(), Charset.forName(response.getBodyEncoding())));
+
+		response = new HttpRequester()
+				.setUrl("http://localhost/test/gbk.php")
+				.setMethod("get")
+				.request();
+
+		Assert.assertEquals("GBK", response.getBodyEncoding());
+		System.out.println(new String(response.getBodyAsByteArray(), Charset.forName(response.getBodyEncoding())));
 	}
 }

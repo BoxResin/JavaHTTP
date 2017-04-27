@@ -99,7 +99,7 @@ public class HttpResponse
 
 	/**
 	 * Returns encoding of content in a response message. It will be null if there's no encoding
-	 *         information in the response header.
+	 *         information in the response header. <br><b>NOTE: It always returns upper case.</b>
 	 * @return content's encoding
 	 */
 	public String getBodyEncoding()
@@ -112,7 +112,7 @@ public class HttpResponse
 			{
 				param = param.trim();
 				if (param.startsWith("charset="))
-					return param.replace("charset=", "");
+					return param.replace("charset=", "").toUpperCase();
 			}
 		}
 		catch (Exception ignored)
