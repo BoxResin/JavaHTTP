@@ -1,4 +1,16 @@
 apply plugin: 'java'
+apply plugin: 'com.novoda.bintray-release'
+
+publish {
+    userOrg = 'boxresin'
+    groupId = 'boxresin.library'
+    artifactId = 'JavaHTTP'
+    publishVersion = '1.0.0'
+    desc = 'HTTP client library for Java'
+    website = 'https://github.com/BoxResin/JavaHTTP'
+    issueTracker = "https://github.com/BoxResin/JavaHTTP/issues"
+    repository = "https://github.com/BoxResin/JavaHTTP.git"
+}
 
 dependencies {
     testCompile 'junit:junit:4.12'
