@@ -70,5 +70,7 @@ public class LibraryTest
 
 		Assert.assertEquals("GBK", response.getBodyEncoding());
 		System.out.println(new String(response.getBodyAsByteArray(), Charset.forName(response.getBodyEncoding())));
+
+		Assert.assertEquals(new String(response.getBodyAsByteArray(), Charset.forName(response.getBodyEncoding())), response.getBody());
 	}
 }
