@@ -1,0 +1,9 @@
+<resources>
+	<string name = "app_name">JavaHTTP</string>
+	<string-array name = "http_methods">
+		<item>GET</item>
+		<item>POST</item>
+		<item>PUT</item>
+		<item>DELETE</item>
+	</string-array>
+</resources>
