@@ -9,7 +9,7 @@
 
 ## About
 
-A light-weight but powerful HTTP client library for Java. It's based on `HttpURLConnection` of java network package.
+A light-weight but powerful HTTP client library for Java. It's based on `HttpURLConnection` in java network package.
 
 [![light-weight library](https://cloud.githubusercontent.com/assets/13031505/25526854/92c769e0-2c50-11e7-9457-5fed461497f9.png)](https://bintray.com/boxresin/maven/JavaHTTP#files/boxresin/library/JavaHTTP/1.0.0)
 
