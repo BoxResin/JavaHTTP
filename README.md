@@ -3,8 +3,8 @@
 [![Download](https://api.bintray.com/packages/boxresin/maven/JavaHTTP/images/download.svg) ](https://bintray.com/boxresin/maven/JavaHTTP/_latestVersion)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/BoxResin/JavaHTTP/master/LICENSE)
 
-![_http_logo_dpwnload 2](https://cloud.githubusercontent.com/assets/13031505/25526913/d0f735ba-2c50-11e7-83c6-d2b3411a031e.png)
 ![java-logo](https://cloud.githubusercontent.com/assets/13031505/25526914/d0f8f148-2c50-11e7-930e-14767ec12829.jpeg)
+![_http_logo_dpwnload 2](https://cloud.githubusercontent.com/assets/13031505/25526913/d0f735ba-2c50-11e7-83c6-d2b3411a031e.png)
 
 
 ## About
