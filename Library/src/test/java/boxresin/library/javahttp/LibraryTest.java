@@ -1,4 +1,4 @@
-package boxresin.library.androidhttp;
+package boxresin.library.javahttp;
 
 import org.junit.Assert;
 import org.junit.Test;

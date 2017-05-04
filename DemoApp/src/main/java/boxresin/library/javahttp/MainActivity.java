@@ -7,8 +7,6 @@ import android.view.View;
 
 import java.io.IOException;
 
-import boxresin.library.androidhttp.HttpRequester;
-import boxresin.library.androidhttp.HttpResponse;
 import boxresin.library.javahttp.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity
@@ -26,6 +24,21 @@ public class MainActivity extends AppCompatActivity
 			String response = savedInstanceState.getString("response");
 			if (response != null)
 				binding.txtResponse.setText(response);
+		}
+
+		try
+		{
+			HttpResponse response = new HttpRequester()
+					.setUrl("https://www.google.com/")
+					.setMethod("GET")
+					.addHeader("key", "value")
+					.addHeader("key", "value")
+					.addHeader("key", "value")
+					.addHeader("key", "value")
+					.request();
+		}
+		catch (IOException e)
+		{
 		}
 	}
 
@@ -60,6 +73,11 @@ public class MainActivity extends AppCompatActivity
 								binding.txtResponse.setText(response.getBody());
 							}
 						});
+
+						int statusCode = response.getStatusCode();
+						String statusMessage = response.getStatusMessage();
+						String body = response.getBody();
+						String header = response.getHeader("something");
 					}
 					catch (IOException e)
 					{

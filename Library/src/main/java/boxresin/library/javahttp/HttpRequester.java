@@ -1,4 +1,4 @@
-package boxresin.library.androidhttp;
+package boxresin.library.javahttp;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
