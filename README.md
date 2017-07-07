@@ -25,7 +25,7 @@ dependencies {
 
 ## Usage
 
-Send an HTTP request to `google.com` with `GET` method like below.
+To send an HTTP request to `google.com` with `GET` method, do like below.
 
 ```Java
 HttpResponse response = new HttpRequester()
@@ -43,7 +43,7 @@ String body = response.getBody();
 String header = response.getHeader("header-key");
 ```
 
-**NOTE**: You have to add `INTERNET` permission to `AndroidManifest.xml` before using it. And **DO NOT** call `HttpRequester`'s `request` method on the UI thread.
+**NOTE**: To use this library in Android project, you have to add `INTERNET` permission to `AndroidManifest.xml` first. And **DO NOT** call `HttpRequester`'s `request` method on the UI thread.
 
 ## Sending a request with POST method
 
