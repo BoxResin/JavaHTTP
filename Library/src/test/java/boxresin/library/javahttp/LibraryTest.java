@@ -4,7 +4,10 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.nio.charset.Charset;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Minsuk Eom on 2017-04-27.
@@ -72,5 +75,43 @@ public class LibraryTest
 		System.out.println(new String(response.getBodyAsByteArray(), Charset.forName(response.getBodyEncoding())));
 
 		Assert.assertEquals(new String(response.getBodyAsByteArray(), Charset.forName(response.getBodyEncoding())), response.getBody());
+	}
+
+	@Test
+	public void testSetURL()
+	{
+		Map<String, String> params = new HashMap<>();
+		params.put("hello", "world");
+		params.put("test", "it");
+
+		HttpRequester requester = new HttpRequester();
+		requester.setUrl("http://www.google.com", params);
+		Assert.assertEquals("http://www.google.com?test=it&hello=world", requester.getUrl());
+
+		params = new HashMap<>();
+		params.put("hangul", "한글 테스트");
+		params.put("second", "두 번째");
+
+		requester.setUrl("http://www.google.com", params);
+		Assert.assertEquals("http://www.google.com?hangul=%ED%95%9C%EA%B8%80+%ED%85%8C%EC%8A%A4%ED%8A%B8&" +
+				"second=%EB%91%90+%EB%B2%88%EC%A7%B8", requester.getUrl());
+	}
+
+	@Test
+	public void testURLCodec()
+	{
+		System.out.println(URLEncoder.encode("한글"));
+		for (Map.Entry<String, Charset> charset : Charset.availableCharsets().entrySet())
+		{
+			try
+			{
+				if ("%ED%95%9C%EA%B8%80".equals(URLEncoder.encode("한글", charset.getKey())))
+					return;
+			}
+			catch (Exception e)
+			{
+			}
+		}
+		Assert.assertTrue(false);
 	}
 }

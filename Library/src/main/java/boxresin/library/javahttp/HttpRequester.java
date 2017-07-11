@@ -5,9 +5,11 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.SocketTimeoutException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -52,6 +54,32 @@ public class HttpRequester
 	public HttpRequester setUrl(String url)
 	{
 		this.url = url;
+		return this;
+	}
+
+	/**
+	 * Sets the URL to request.
+	 * @param url    The URL before a part of query parameter
+	 * @param params Query parameters to URL. It will be URL encoded.
+	 * @since v1.1.0
+	 */
+	public HttpRequester setUrl(String url, Map<String, String> params)
+	{
+		this.url = url;
+		if (!params.isEmpty())
+		{
+			this.url += "?";
+			for (Map.Entry<String, String> param : params.entrySet())
+			{
+				try
+				{
+					this.url += (param.getKey() + "=" + URLEncoder.encode(param.getValue(), "UTF-8"));
+					this.url += '&';
+				}
+				catch (UnsupportedEncodingException ignored) {}
+			}
+			this.url = this.url.substring(0, this.url.length() - 1);
+		}
 		return this;
 	}
 
