@@ -45,7 +45,7 @@ String header = response.getHeader("header-key");
 
 **NOTE**: To use this library in Android project, you have to add `INTERNET` permission to `AndroidManifest.xml` first. And **DO NOT** call `HttpRequester`'s `request` method on the UI thread.
 
-- Sending a request with POST method
+- **Sending a request with POST method**
 
 ```java
 HttpResponse response = new HttpRequester()
@@ -58,7 +58,7 @@ HttpResponse response = new HttpRequester()
     .request();
 ```
 
-- Sending a request with some headers
+- **Sending a request with some headers**
 
 ```java
 HttpResponse response = new HttpRequester()
@@ -72,7 +72,7 @@ HttpResponse response = new HttpRequester()
 ```
 
 ## Document
-You can see all documents of the library at [here](https://boxresin.github.io/JavaHTTP/document/v1.0.0/)
+You can see all documents of the library at [here](https://boxresin.github.io/JavaHTTP/document/v1.0.0/).
 
 ## License
 
