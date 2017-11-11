@@ -19,7 +19,7 @@ Add the following to `app`'s `build.gradle` file:
 
 ```gradle
 dependencies { 
-    compile 'boxresin.library:JavaHTTP:1.0.0'
+    compile 'boxresin.library:JavaHTTP:1.1.0'
 }
 ```
 
@@ -40,10 +40,10 @@ You can get information of the HTTP response from the `HttpResponse` object.
 int statusCode = response.getStatusCode();
 String statusMessage = response.getStatusMessage();
 String body = response.getBody();
-String header = response.getHeader("header-key");
+String headerValue = response.getHeader("header-key");
 ```
 
-**NOTE**: To use this library in Android project, you have to add `INTERNET` permission to `AndroidManifest.xml` first. And **DO NOT** call `HttpRequester`'s `request` method on the UI thread.
+**NOTE**: To use this library in Android project, you have to add `INTERNET` permission to `AndroidManifest.xml` first. Furthermore, **DO NOT** call `HttpRequester`'s `request` method on the UI thread.
 
 - **Sending a request with POST method**
 
@@ -71,8 +71,22 @@ HttpResponse response = new HttpRequester()
     .request();
 ```
 
+- **URL query string with percent-encoding**
+
+```java
+// These keys and values will be percent encoded.
+Map<String, String> params = new HashMap<>();
+params.put("q", "java http");
+params.put("from", "https://github.com/BoxResin/JavaHTTP");
+
+HttpResponse response = new HttpRequester()
+        .setUrl("https://www.google.com/", params)
+        .setMethod("GET")
+        .request();
+```
+
 ## Document
-You can see all documents of the library at [here](https://boxresin.github.io/JavaHTTP/document/v1.0.0/).
+You can see all documents of the library at [here](https://boxresin.github.io/JavaHTTP/document/v1.1.0/).
 
 ## License
 
