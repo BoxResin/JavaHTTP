@@ -13,6 +13,7 @@ publish {
 }
 
 dependencies {
+    compile 'org.jetbrains:annotations:15.0' // For @NotNull and @Nullable
     testCompile 'junit:junit:4.12'
     compile fileTree(dir: 'libs', include: ['*.jar'])
 }

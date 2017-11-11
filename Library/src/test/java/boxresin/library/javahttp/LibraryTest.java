@@ -4,7 +4,10 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Minsuk Eom on 2017-04-27.
@@ -36,9 +39,11 @@ public class LibraryTest
 				.setUrl("http://localhost/test/test.php")
 				.setMethod("POST")
 				.addParameter("hello", "anything")
+				.addParameter("key", "one")
+				.addParameter("key2", "two")
 				.request();
 
-		Assert.assertEquals("Hello World!\nWorld!\n", response.getBody());
+		Assert.assertEquals("Hello World!\nWorld!\nha!\n\uD55C\uAE00\n", response.getBody());
 
 		// Test a complex requset.
 		response = new HttpRequester()
@@ -49,6 +54,29 @@ public class LibraryTest
 				.request();
 
 		Assert.assertEquals("Hello World!\napiKey is detected.\nWorld!\n", response.getBody());
+	}
+
+	/**
+	 * URL encoding test
+	 */
+	@Test
+	public void testSetUrl() throws UnsupportedEncodingException
+	{
+		// hangul query
+		Map<String, String> paramsMap = new HashMap<>();
+		paramsMap.put("q", "\uD55C\uAE00 test");
+		paramsMap.put("from", "https://www.naver.com");
+
+		HttpRequester requester = new HttpRequester()
+				.setUrl("https://www.google.com", paramsMap);
+		Assert.assertEquals("https://www.google.com?q=%ED%95%9C%EA%B8%80+test&from=https%3A%2F%2Fwww.naver.com", requester.getUrl());
+
+		// crazy query
+		paramsMap.clear();
+		paramsMap.put("foo", "&^*$= my crazy query% |!!");
+
+		requester.setUrl("https://www.daum.net", paramsMap);
+		Assert.assertEquals("https://www.daum.net?foo=%26%5E*%24%3D+my+crazy+query%25+%7C%21%21", requester.getUrl());
 	}
 
 	@Test

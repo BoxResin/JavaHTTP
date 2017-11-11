@@ -1,5 +1,8 @@
 package boxresin.library.javahttp;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
@@ -11,15 +14,16 @@ import java.net.HttpURLConnection;
  */
 public class HttpResponse
 {
-	private int statusCode;
-	private String statusMessage;
-	private ByteArrayOutputStream bodyStream;
-	private HttpURLConnection connection;
+				private int statusCode;
+	@NotNull    private String statusMessage;
+	@NotNull    private ByteArrayOutputStream bodyStream;
+	@NotNull    private HttpURLConnection connection;
 
 	/**
 	 * Preventing from instantiation of HttpResponse with constructor
 	 */
-	HttpResponse(int statusCode, String statusMessage, ByteArrayOutputStream bodyStream, HttpURLConnection connection)
+	HttpResponse(int statusCode, @NotNull String statusMessage,
+	             @NotNull ByteArrayOutputStream bodyStream, @NotNull HttpURLConnection connection)
 	{
 		this.statusCode = statusCode;
 		this.statusMessage = statusMessage;
@@ -42,6 +46,7 @@ public class HttpResponse
 	 * @return Description of HTTP status code as String type (ex. "Not Found")
 	 * @since v1.0.0
 	 */
+	@NotNull
 	public String getStatusMessage()
 	{
 		return statusMessage;
@@ -52,6 +57,7 @@ public class HttpResponse
 	 * @return A header of a response message. It will be null if there's no such header.
 	 * @since v1.0.0
 	 */
+	@Nullable
 	public String getHeader(String key)
 	{
 		return connection.getHeaderField(key);
@@ -63,6 +69,7 @@ public class HttpResponse
 	 * @return Body of a response message as String type
 	 * @since v1.0.0
 	 */
+	@NotNull
 	public String getBody()
 	{
 		try
@@ -82,6 +89,7 @@ public class HttpResponse
 	 * @return Body of a response message as String type with specified encoding
 	 * @since v1.0.0
 	 */
+	@NotNull
 	public String getBody(String encoding) throws UnsupportedEncodingException
 	{
 		return bodyStream.toString(encoding);
@@ -92,6 +100,7 @@ public class HttpResponse
 	 * @return Body of a response message as byte array.
 	 * @since v1.0.0
 	 */
+	@NotNull
 	public byte[] getBodyAsByteArray()
 	{
 		return bodyStream.toByteArray();
@@ -102,6 +111,7 @@ public class HttpResponse
 	 *         information in the response header. <br><b>NOTE: It always returns upper case.</b>
 	 * @return content's encoding
 	 */
+	@Nullable
 	public String getBodyEncoding()
 	{
 		try

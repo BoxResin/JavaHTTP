@@ -25,21 +25,6 @@ public class MainActivity extends AppCompatActivity
 			if (response != null)
 				binding.txtResponse.setText(response);
 		}
-
-		try
-		{
-			HttpResponse response = new HttpRequester()
-					.setUrl("https://www.google.com/")
-					.setMethod("GET")
-					.addHeader("key", "value")
-					.addHeader("key", "value")
-					.addHeader("key", "value")
-					.addHeader("key", "value")
-					.request();
-		}
-		catch (IOException e)
-		{
-		}
 	}
 
 	public void onClick(View view)
@@ -87,7 +72,8 @@ public class MainActivity extends AppCompatActivity
 		}
 	}
 
-	@Override protected void onSaveInstanceState(Bundle outState)
+	@Override
+	protected void onSaveInstanceState(Bundle outState)
 	{
 		super.onSaveInstanceState(outState);
 		outState.putString("response", binding.txtResponse.getText().toString());
