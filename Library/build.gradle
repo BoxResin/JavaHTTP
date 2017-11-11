@@ -1,11 +1,13 @@
 apply plugin: 'java'
 apply plugin: 'com.novoda.bintray-release'
 
+// How to publish the library
+// ./gradlew clean build bintrayUpload -PbintrayUser=BINTRAY_USERNAME -PbintrayKey=BINTRAY_KEY -PdryRun=false
 publish {
     userOrg = 'boxresin'
     groupId = 'boxresin.library'
     artifactId = 'JavaHTTP'
-    publishVersion = '1.0.0'
+    publishVersion = '1.1.0'
     desc = 'HTTP client library for Java'
     website = 'https://github.com/BoxResin/JavaHTTP'
     issueTracker = "https://github.com/BoxResin/JavaHTTP/issues"
