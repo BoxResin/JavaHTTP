@@ -1,13 +1,17 @@
 package boxresin.library.javahttp;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.SocketTimeoutException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -18,10 +22,10 @@ import java.util.TreeMap;
 public class HttpRequester
 {
 	// @formatter:off
-	private String  url    = "";    // URL to requst
-	private String  method = "";    // HTTP method
-	private int     connectTimeout; // Timeout when connecting to a web server, in milliseconds
-	private int     readTimeout;    // Timeout when reading an HTTP response from a web server, in milliseconds
+	@NotNull    private String  url    = "";    // URL to requst
+	@NotNull    private String  method = "";    // HTTP method
+				private int     connectTimeout; // Timeout when connecting to a web server, in milliseconds
+				private int     readTimeout;    // Timeout when reading an HTTP response from a web server, in milliseconds
 
 	private Map<String, String> params  = new TreeMap<>(); // Map that contains POST parameters
 	private Map<String, String> headers = new TreeMap<>(); // Map that contains request headers
@@ -39,6 +43,7 @@ public class HttpRequester
 	 * @return The URL to request
 	 * @since v1.0.0
 	 */
+	@NotNull
 	public String getUrl()
 	{
 		return url;
@@ -49,10 +54,42 @@ public class HttpRequester
 	 * @param url The URL to request
 	 * @since v1.0.0
 	 */
-	public HttpRequester setUrl(String url)
+	@NotNull
+	public HttpRequester setUrl(@NotNull String url)
 	{
 		this.url = url;
 		return this;
+	}
+
+	/**
+	 * Sets the URL to request.
+	 * @param url    The URL without query
+	 * @param params A map that contains URL query parameters into key and value. The key and value
+	 *               will be percent encoded as UTF-8.
+	 * @throws UnsupportedEncodingException Occurs when UTF-8 is not available.
+	 * @since v1.1.0
+	 */
+	@NotNull
+	public HttpRequester setUrl(@NotNull String url, @NotNull Map<String, String> params)
+			throws UnsupportedEncodingException
+	{
+		StringBuilder queryString = new StringBuilder();
+
+		// Convert the params map into a query string.
+		for (Map.Entry<String, String> entry : params.entrySet())
+		{
+			if (queryString.length() != 0)
+				queryString.append('&');
+
+			String encodedKey = URLEncoder.encode(entry.getKey(), "UTF-8");
+			String encodedValue = URLEncoder.encode(entry.getValue(), "UTF-8");
+
+			queryString.append(encodedKey);
+			queryString.append('=');
+			queryString.append(encodedValue);
+		}
+
+		return setUrl(url + '?' + queryString.toString());
 	}
 
 	/**
@@ -60,6 +97,7 @@ public class HttpRequester
 	 * @return HTTP method as String type (ex. "POST", "GET" etc)
 	 * @since v1.0.0
 	 */
+	@NotNull
 	public String getMethod()
 	{
 		return method;
@@ -71,7 +109,8 @@ public class HttpRequester
 	 *               <b>It's not case sensitive, so you can use both "POST" and "post".</b>
 	 * @since v1.0.0
 	 */
-	public HttpRequester setMethod(String method)
+	@NotNull
+	public HttpRequester setMethod(@NotNull String method)
 	{
 		this.method = method.toUpperCase();
 		return this;
@@ -92,6 +131,7 @@ public class HttpRequester
 	 * @param timeout Connect-timeout, in milliseconds
 	 * @since v1.0.0
 	 */
+	@NotNull
 	public HttpRequester setConnectTimeout(int timeout)
 	{
 		this.connectTimeout = timeout;
@@ -113,6 +153,7 @@ public class HttpRequester
 	 * @param timeout Read-timeout, in milliseconds
 	 * @since v1.0.0
 	 */
+	@NotNull
 	public HttpRequester setReadTimeout(int timeout)
 	{
 		this.readTimeout = timeout;
@@ -124,7 +165,8 @@ public class HttpRequester
 	 * If specified HTTP method is not "POST", this parameter would be ignored.
 	 * @since v1.0.0
 	 */
-	public HttpRequester addParameter(String key, String value)
+	@NotNull
+	public HttpRequester addParameter(@NotNull String key, @NotNull String value)
 	{
 		params.put(key, value);
 		return this;
@@ -143,7 +185,8 @@ public class HttpRequester
 	 * Adds a header for request.
 	 * @since v1.0.0
 	 */
-	public HttpRequester addHeader(String key, String value)
+	@NotNull
+	public HttpRequester addHeader(@NotNull String key, @NotNull String value)
 	{
 		headers.put(key, value);
 		return this;
@@ -161,8 +204,10 @@ public class HttpRequester
 	 * Send HTTP request to a web server.
 	 *
 	 * @throws SocketTimeoutException Occurs when timeout.
-	 * @return An HTML response from the web server. It will return null if 'cancel' method is called during request.
+	 * @return An HTML response from the web server. It will return null if 'cancel' method is
+	 *         called during request.
 	 */
+	@NotNull
 	public HttpResponse request() throws SocketTimeoutException, IOException
 	{
 		// Set options.
