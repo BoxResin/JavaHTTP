@@ -173,6 +173,19 @@ public class HttpRequester
 	}
 
 	/**
+	 * Adds parameters for POST method.
+	 * If specified HTTP method is not "POST", these parameters would be ignored.
+	 * @param params A map that contains parameters into key and value.
+	 * @since v1.1.1
+	 */
+	@NotNull
+	public HttpRequester addParameters(@NotNull Map<String, String> params)
+	{
+		this.params.putAll(params);
+		return this;
+	}
+
+	/**
 	 * Clears all of parameters for POST method.
 	 * @since v1.0.0
 	 */
