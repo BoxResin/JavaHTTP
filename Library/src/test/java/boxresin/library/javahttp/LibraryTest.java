@@ -34,13 +34,27 @@ public class LibraryTest
 
 		Assert.assertEquals("Hello World!\napiKey is detected.\n", response.getBody());
 
-		// Test a request with some POST parameter.
+		// Test a request with some POST parameters.
 		response = new HttpRequester()
 				.setUrl("http://localhost/test/test.php")
 				.setMethod("POST")
 				.addParameter("hello", "anything")
 				.addParameter("key", "one")
 				.addParameter("key2", "two")
+				.request();
+
+		Assert.assertEquals("Hello World!\nWorld!\nha!\n\uD55C\uAE00\n", response.getBody());
+
+		// Test a request with some POST parameters.
+		Map<String, String> params  = new HashMap<>();
+		params.put("hello", "anything");
+		params.put("key", "one");
+		params.put("key2", "two");
+
+		response = new HttpRequester()
+				.setUrl("http://localhost/test/test.php")
+				.setMethod("POST")
+				.addParameters(params)
 				.request();
 
 		Assert.assertEquals("Hello World!\nWorld!\nha!\n\uD55C\uAE00\n", response.getBody());

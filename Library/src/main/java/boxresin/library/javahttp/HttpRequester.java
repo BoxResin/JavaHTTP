@@ -1,6 +1,7 @@
 package boxresin.library.javahttp;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
@@ -40,6 +41,7 @@ public class HttpRequester
 
 	/**
 	 * Returns the URL to request.
+	 *
 	 * @return The URL to request
 	 * @since v1.0.0
 	 */
@@ -51,6 +53,7 @@ public class HttpRequester
 
 	/**
 	 * Sets the URL to request.
+	 *
 	 * @param url The URL to request
 	 * @since v1.0.0
 	 */
@@ -63,6 +66,7 @@ public class HttpRequester
 
 	/**
 	 * Sets the URL to request.
+	 *
 	 * @param url    The URL without query
 	 * @param params A map that contains URL query parameters into key and value. The key and value
 	 *               will be percent encoded as UTF-8.
@@ -94,6 +98,7 @@ public class HttpRequester
 
 	/**
 	 * Returns HTTP method to request.
+	 *
 	 * @return HTTP method as String type (ex. "POST", "GET" etc)
 	 * @since v1.0.0
 	 */
@@ -105,6 +110,7 @@ public class HttpRequester
 
 	/**
 	 * Sets HTTP method.
+	 *
 	 * @param method HTTP method as String type (ex. "POST", "GET" etc)<br>
 	 *               <b>It's not case sensitive, so you can use both "POST" and "post".</b>
 	 * @since v1.0.0
@@ -118,6 +124,7 @@ public class HttpRequester
 
 	/**
 	 * Returns connect-timeout.
+	 *
 	 * @return Connect-timeout, in milliseconds
 	 * @since v1.0.0
 	 */
@@ -128,6 +135,7 @@ public class HttpRequester
 
 	/**
 	 * Sets timeout when connecting to a web server.
+	 *
 	 * @param timeout Connect-timeout, in milliseconds
 	 * @since v1.0.0
 	 */
@@ -140,6 +148,7 @@ public class HttpRequester
 
 	/**
 	 * Returns read-timeout.
+	 *
 	 * @return Read-timeout, in milliseconds
 	 * @since v1.0.0
 	 */
@@ -150,6 +159,7 @@ public class HttpRequester
 
 	/**
 	 * Sets timeout when reading an HTTP response from a web server.
+	 *
 	 * @param timeout Read-timeout, in milliseconds
 	 * @since v1.0.0
 	 */
@@ -163,12 +173,27 @@ public class HttpRequester
 	/**
 	 * Adds a parameter for POST method.
 	 * If specified HTTP method is not "POST", this parameter would be ignored.
+	 *
 	 * @since v1.0.0
 	 */
 	@NotNull
 	public HttpRequester addParameter(@NotNull String key, @NotNull String value)
 	{
 		params.put(key, value);
+		return this;
+	}
+
+	/**
+	 * Adds parameters for POST method.
+	 * If specified HTTP method is not "POST", these parameters would be ignored.
+	 *
+	 * @param params A map that contains parameters into key and value.
+	 * @since v1.1.1
+	 */
+	@NotNull
+	public HttpRequester addParameters(@NotNull Map<String, String> params)
+	{
+		this.params.putAll(params);
 		return this;
 	}
 
@@ -193,7 +218,20 @@ public class HttpRequester
 	}
 
 	/**
+	 * Adds headers for request.
+	 * @param headers A map that contains headers into key and value.
+	 * @since v1.1.1
+	 */
+	@NotNull
+	public HttpRequester addHeaders(@NotNull Map<String, String> headers)
+	{
+		this.headers.putAll(headers);
+		return this;
+	}
+
+	/**
 	 * Clears all of headers for request.
+	 * @since v1.0.0
 	 */
 	public void clearHeaders()
 	{
@@ -204,8 +242,8 @@ public class HttpRequester
 	 * Send HTTP request to a web server.
 	 *
 	 * @throws SocketTimeoutException Occurs when timeout.
-	 * @return An HTML response from the web server. It will return null if 'cancel' method is
-	 *         called during request.
+	 * @return An HTML response from the web server.
+	 * @since v1.0.0
 	 */
 	@NotNull
 	public HttpResponse request() throws SocketTimeoutException, IOException
@@ -263,5 +301,27 @@ public class HttpRequester
 
 		connection.disconnect();
 		return new HttpResponse(statusCode, statusMessage, bufferStream, connection);
+	}
+
+	/**
+	 * Send HTTP request to a web server.
+	 *
+	 * @param autoRedirection If it set to true, detect and re-request new URL automatically.
+	 * @throws SocketTimeoutException Occurs when timeout.
+	 * @return An HTML response from the web server.
+	 * @since v1.1.1
+	 */
+	@NotNull
+	public HttpResponse request(boolean autoRedirection) throws SocketTimeoutException, IOException
+	{
+		HttpResponse response = request();
+		@Nullable String newUrl = response.getHeader("Location");
+
+		if (autoRedirection && newUrl != null)
+		{
+			setUrl(newUrl);
+			return request(true);
+		}
+		else return response;
 	}
 }
