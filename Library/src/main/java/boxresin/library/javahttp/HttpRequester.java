@@ -218,6 +218,18 @@ public class HttpRequester
 	}
 
 	/**
+	 * Adds headers for request.
+	 * @param headers A map that contains headers into key and value.
+	 * @since v1.1.1
+	 */
+	@NotNull
+	public HttpRequester addHeaders(@NotNull Map<String, String> headers)
+	{
+		this.headers.putAll(headers);
+		return this;
+	}
+
+	/**
 	 * Clears all of headers for request.
 	 * @since v1.0.0
 	 */
