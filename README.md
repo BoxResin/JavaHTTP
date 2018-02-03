@@ -45,7 +45,7 @@ String headerValue = response.getHeader("header-key");
 
 **NOTE**: To use this library in Android project, you have to add `INTERNET` permission to `AndroidManifest.xml` first. Furthermore, **DO NOT** call `HttpRequester`'s `request` method on the UI thread.
 
-- **Sending a request with POST method**
+- **Sending request with POST method**
 
 ```java
 HttpResponse response = new HttpRequester()
@@ -58,7 +58,7 @@ HttpResponse response = new HttpRequester()
     .request();
 ```
 
-- **Sending a request with some headers**
+- **Sending request with some headers**
 
 ```java
 HttpResponse response = new HttpRequester()
@@ -76,7 +76,7 @@ HttpResponse response = new HttpRequester()
 ```java
 // These keys and values will be percent encoded.
 Map<String, String> params = new HashMap<>();
-params.put("q", "java http");
+params.put("q", "java http 특수문자");
 params.put("from", "https://github.com/BoxResin/JavaHTTP");
 
 HttpResponse response = new HttpRequester()
