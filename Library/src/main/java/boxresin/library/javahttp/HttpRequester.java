@@ -1,6 +1,7 @@
 package boxresin.library.javahttp;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
@@ -217,8 +218,7 @@ public class HttpRequester
 	 * Send HTTP request to a web server.
 	 *
 	 * @throws SocketTimeoutException Occurs when timeout.
-	 * @return An HTML response from the web server. It will return null if 'cancel' method is
-	 *         called during request.
+	 * @return An HTML response from the web server.
 	 */
 	@NotNull
 	public HttpResponse request() throws SocketTimeoutException, IOException
@@ -276,5 +276,26 @@ public class HttpRequester
 
 		connection.disconnect();
 		return new HttpResponse(statusCode, statusMessage, bufferStream, connection);
+	}
+
+	/**
+	 * Send HTTP request to a web server.
+	 *
+	 * @param autoRedirection If it set to true, detect and re-request new URL automatically.
+	 * @throws SocketTimeoutException Occurs when timeout.
+	 * @return An HTML response from the web server.
+	 */
+	@NotNull
+	public HttpResponse request(boolean autoRedirection) throws SocketTimeoutException, IOException
+	{
+		HttpResponse response = request();
+		@Nullable String newUrl = response.getHeader("Location");
+
+		if (autoRedirection && newUrl != null)
+		{
+			setUrl(newUrl);
+			return request(true);
+		}
+		else return response;
 	}
 }
