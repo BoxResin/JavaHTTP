@@ -10,6 +10,7 @@ import java.net.HttpURLConnection;
 /**
  * A class representing HTTP response.
  * You can get information in response(ex. HTTP status code, body of a message etc) via this class.
+ *
  * @since v1.0.0
  */
 public class HttpResponse
@@ -20,7 +21,8 @@ public class HttpResponse
 	@NotNull    private HttpURLConnection connection;
 
 	/**
-	 * Preventing from instantiation of HttpResponse with constructor
+	 * Preventing from instantiation of HttpResponse with constructor.
+	 * @since v1.0.0
 	 */
 	HttpResponse(int statusCode, @NotNull String statusMessage,
 	             @NotNull ByteArrayOutputStream bodyStream, @NotNull HttpURLConnection connection)
@@ -32,7 +34,6 @@ public class HttpResponse
 	}
 
 	/**
-	 * Returns HTTP status code of a response message.
 	 * @return HTTP status code as int type (ex. 404)
 	 * @since v1.0.0
 	 */
@@ -42,8 +43,7 @@ public class HttpResponse
 	}
 
 	/**
-	 * Returns a description of HTTP status code.
-	 * @return Description of HTTP status code as String type (ex. "Not Found")
+	 * @return A description for HTTP status code as String type (ex. "Not Found")
 	 * @since v1.0.0
 	 */
 	@NotNull
@@ -53,8 +53,9 @@ public class HttpResponse
 	}
 
 	/**
-	 * Returns a header of a response message by specified key. <b>The key is case-sensitive.</b>
-	 * @return A header of a response message. It will be null if there's no such header.
+	 * Returns a header for response message by specified key. <b>The key is case-sensitive.</b>
+	 *
+	 * @return It will be null if there's no such header
 	 * @since v1.0.0
 	 */
 	@Nullable
@@ -64,9 +65,10 @@ public class HttpResponse
 	}
 
 	/**
-	 * Returns content of a response message. It can be an HTML document or JSON-formatted data. <br>
+	 * Returns content for response message. It can be an HTML document or JSON-formatted text. <br>
 	 * <b>NOTE: It detects content encoding automatically.</b>
-	 * @return Body of a response message as String type
+	 *
+	 * @return Body for response message as String type
 	 * @since v1.0.0
 	 */
 	@NotNull
@@ -84,9 +86,10 @@ public class HttpResponse
 	}
 
 	/**
-	 * Returns content of a response message. It can be an HTML document or JSON-formatted data.
+	 * Returns content for response message. It can be an HTML document or JSON-formatted text.
+	 *
 	 * @param encoding Name of charset (ex. "UTF-8")
-	 * @return Body of a response message as String type with specified encoding
+	 * @return Body for response message as String type with specified encoding
 	 * @since v1.0.0
 	 */
 	@NotNull
@@ -96,8 +99,9 @@ public class HttpResponse
 	}
 
 	/**
-	 * Returns content of a response message. It can be an HTML document or JSON-formatted data.
-	 * @return Body of a response message as byte array.
+	 * Returns content for response message. It can be an HTML document or JSON-formatted text.
+	 *
+	 * @return Body for response message as byte array
 	 * @since v1.0.0
 	 */
 	@NotNull
@@ -107,8 +111,9 @@ public class HttpResponse
 	}
 
 	/**
-	 * Returns encoding of content in a response message. It will be null if there's no encoding
-	 *         information in the response header. <br><b>NOTE: It always returns upper case.</b>
+	 * Returns encoding of content in the response message. It will be null if there's no encoding
+	 *         information in the response header. <br><b>NOTE: It always returns as upper case.</b>
+	 *
 	 * @return content's encoding
 	 */
 	@Nullable

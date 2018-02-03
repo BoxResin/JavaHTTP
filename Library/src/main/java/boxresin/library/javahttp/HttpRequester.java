@@ -41,6 +41,7 @@ public class HttpRequester
 
 	/**
 	 * Returns the URL to request.
+	 *
 	 * @return The URL to request
 	 * @since v1.0.0
 	 */
@@ -52,6 +53,7 @@ public class HttpRequester
 
 	/**
 	 * Sets the URL to request.
+	 *
 	 * @param url The URL to request
 	 * @since v1.0.0
 	 */
@@ -64,6 +66,7 @@ public class HttpRequester
 
 	/**
 	 * Sets the URL to request.
+	 *
 	 * @param url    The URL without query
 	 * @param params A map that contains URL query parameters into key and value. The key and value
 	 *               will be percent encoded as UTF-8.
@@ -95,6 +98,7 @@ public class HttpRequester
 
 	/**
 	 * Returns HTTP method to request.
+	 *
 	 * @return HTTP method as String type (ex. "POST", "GET" etc)
 	 * @since v1.0.0
 	 */
@@ -106,6 +110,7 @@ public class HttpRequester
 
 	/**
 	 * Sets HTTP method.
+	 *
 	 * @param method HTTP method as String type (ex. "POST", "GET" etc)<br>
 	 *               <b>It's not case sensitive, so you can use both "POST" and "post".</b>
 	 * @since v1.0.0
@@ -119,6 +124,7 @@ public class HttpRequester
 
 	/**
 	 * Returns connect-timeout.
+	 *
 	 * @return Connect-timeout, in milliseconds
 	 * @since v1.0.0
 	 */
@@ -129,6 +135,7 @@ public class HttpRequester
 
 	/**
 	 * Sets timeout when connecting to a web server.
+	 *
 	 * @param timeout Connect-timeout, in milliseconds
 	 * @since v1.0.0
 	 */
@@ -141,6 +148,7 @@ public class HttpRequester
 
 	/**
 	 * Returns read-timeout.
+	 *
 	 * @return Read-timeout, in milliseconds
 	 * @since v1.0.0
 	 */
@@ -151,6 +159,7 @@ public class HttpRequester
 
 	/**
 	 * Sets timeout when reading an HTTP response from a web server.
+	 *
 	 * @param timeout Read-timeout, in milliseconds
 	 * @since v1.0.0
 	 */
@@ -164,6 +173,7 @@ public class HttpRequester
 	/**
 	 * Adds a parameter for POST method.
 	 * If specified HTTP method is not "POST", this parameter would be ignored.
+	 *
 	 * @since v1.0.0
 	 */
 	@NotNull
@@ -176,6 +186,7 @@ public class HttpRequester
 	/**
 	 * Adds parameters for POST method.
 	 * If specified HTTP method is not "POST", these parameters would be ignored.
+	 *
 	 * @param params A map that contains parameters into key and value.
 	 * @since v1.1.1
 	 */
@@ -208,6 +219,7 @@ public class HttpRequester
 
 	/**
 	 * Clears all of headers for request.
+	 * @since v1.0.0
 	 */
 	public void clearHeaders()
 	{
@@ -219,6 +231,7 @@ public class HttpRequester
 	 *
 	 * @throws SocketTimeoutException Occurs when timeout.
 	 * @return An HTML response from the web server.
+	 * @since v1.0.0
 	 */
 	@NotNull
 	public HttpResponse request() throws SocketTimeoutException, IOException
@@ -284,6 +297,7 @@ public class HttpRequester
 	 * @param autoRedirection If it set to true, detect and re-request new URL automatically.
 	 * @throws SocketTimeoutException Occurs when timeout.
 	 * @return An HTML response from the web server.
+	 * @since v1.1.1
 	 */
 	@NotNull
 	public HttpResponse request(boolean autoRedirection) throws SocketTimeoutException, IOException
