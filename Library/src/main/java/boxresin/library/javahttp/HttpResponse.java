@@ -6,6 +6,8 @@ import org.jetbrains.annotations.Nullable;
 import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.util.List;
+import java.util.Map;
 
 /**
  * A class representing HTTP response.
@@ -62,6 +64,16 @@ public class HttpResponse
 	public String getHeader(String key)
 	{
 		return connection.getHeaderField(key);
+	}
+
+	/**
+	 * @return All headers for response message. <b>NOTE: It's unmodifiable</b>
+	 * @since v1.1.1
+	 */
+	@NotNull
+	public Map<String, List<String>> getHeaders()
+	{
+		return connection.getHeaderFields();
 	}
 
 	/**
