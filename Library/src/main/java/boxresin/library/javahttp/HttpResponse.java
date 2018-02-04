@@ -78,7 +78,8 @@ public class HttpResponse
 
 	/**
 	 * Returns content for response message. It can be an HTML document or JSON-formatted text. <br>
-	 * <b>NOTE: It detects content encoding automatically.</b>
+	 * <b>NOTE: It detects content's encoding automatically.</b> If there is no encoding
+	 * information, default is UTF-8.
 	 *
 	 * @return Body for response message as String type
 	 * @since v1.0.0
@@ -88,7 +89,9 @@ public class HttpResponse
 	{
 		try
 		{
-			String encoding = getBodyEncoding();
+			@Nullable String encoding = getBodyEncoding();
+			if (encoding == null)
+				encoding = "UTF-8";
 			return bodyStream.toString(encoding);
 		}
 		catch (Exception e)
@@ -105,7 +108,7 @@ public class HttpResponse
 	 * @since v1.0.0
 	 */
 	@NotNull
-	public String getBody(String encoding) throws UnsupportedEncodingException
+	public String getBody(@NotNull String encoding) throws UnsupportedEncodingException
 	{
 		return bodyStream.toString(encoding);
 	}
