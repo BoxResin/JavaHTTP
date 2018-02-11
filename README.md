@@ -19,7 +19,7 @@ Add the following to `app`'s `build.gradle` file:
 
 ```gradle
 dependencies { 
-    compile 'boxresin.library:JavaHTTP:1.1.1'
+    implementation 'boxresin.library:JavaHTTP:1.1.1'
 }
 ```
 
