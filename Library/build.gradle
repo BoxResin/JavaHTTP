@@ -4,20 +4,25 @@ apply plugin: 'com.novoda.bintray-release'
 // How to publish the library
 // ./gradlew clean build bintrayUpload -PbintrayUser=BINTRAY_USERNAME -PbintrayKey=BINTRAY_KEY -PdryRun=false
 publish {
-    userOrg = 'boxresin'
-    groupId = 'boxresin.library'
-    artifactId = 'JavaHTTP'
-    publishVersion = '1.1.1'
-    desc = 'HTTP client library for Java'
-    website = 'https://github.com/BoxResin/JavaHTTP'
-    issueTracker = "https://github.com/BoxResin/JavaHTTP/issues"
-    repository = "https://github.com/BoxResin/JavaHTTP.git"
+	userOrg = 'boxresin'
+	groupId = 'boxresin.library'
+	artifactId = 'JavaHTTP'
+	publishVersion = '1.1.1'
+	desc = 'HTTP client library for Java'
+	website = 'https://github.com/BoxResin/JavaHTTP'
+	issueTracker = "https://github.com/BoxResin/JavaHTTP/issues"
+	repository = "https://github.com/BoxResin/JavaHTTP.git"
 }
 
 dependencies {
-    compile 'org.jetbrains:annotations:15.0' // For @NotNull and @Nullable
-    testCompile 'junit:junit:4.12'
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+	// Local JAR files
+	implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+	// For @NotNull and @Nullable
+	implementation 'org.jetbrains:annotations:15.0'
+
+	// Test
+	testImplementation 'junit:junit:4.12'
 }
 
 sourceCompatibility = "1.7"
