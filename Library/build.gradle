@@ -1,17 +1,27 @@
 apply plugin: 'java'
-apply plugin: 'com.novoda.bintray-release'
+apply plugin: 'com.minyushov.bintray'
 
-// How to publish the library
-// ./gradlew clean build bintrayUpload -PbintrayUser=BINTRAY_USERNAME -PbintrayKey=BINTRAY_KEY -PdryRun=false
-publish {
-	userOrg = 'boxresin'
+// Bintray upload setting
+bintrayUpload {
+	// package info
 	groupId = 'boxresin.library'
 	artifactId = 'JavaHTTP'
-	publishVersion = '1.1.1'
-	desc = 'HTTP client library for Java'
-	website = 'https://github.com/BoxResin/JavaHTTP'
-	issueTracker = "https://github.com/BoxResin/JavaHTTP/issues"
-	repository = "https://github.com/BoxResin/JavaHTTP.git"
+	version = '1.2.0'
+
+	// Bintray info
+	repo = 'maven'
+	pkgName = 'JavaHTTP'
+	vcsUrl = 'https://github.com/BoxResin/JavaHTTP.git'
+	license = 'MIT'
+
+	// others
+	dryRun = false // Prevent auto-delivery to Bintray
+	docs = true
+	sources = true
+
+	// 'user' and 'key' should be inputed from the shell
+	user = findProperty('user') ?: 'none'
+	key = findProperty('key') ?: 'none'
 }
 
 dependencies {
