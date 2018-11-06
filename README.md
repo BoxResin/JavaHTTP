@@ -1,4 +1,4 @@
-# JavaHTTP
+**NOTE:** This repository has been deprecated. Use [OkHttp](https://github.com/square/okhttp).
 
 [![Download](https://api.bintray.com/packages/boxresin/maven/JavaHTTP/images/download.svg) ](https://bintray.com/boxresin/maven/JavaHTTP/_latestVersion)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/BoxResin/JavaHTTP/master/LICENSE)
